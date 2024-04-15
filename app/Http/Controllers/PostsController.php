@@ -27,16 +27,16 @@ class PostsController extends Controller
         
         if ($request->hasFile('media')) {
             $file = $request->file('media');
-            $fileName = time() .  $file->getClientOriginalName();
+            $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->move('images', $fileName);
-
+            $filePath = 'images/' . $fileName;
         }
 
         $post = new Post();
         $post->user_id = auth()->id();
         $post->category_id = $request->category_id;
         $post->content = $request->content;
-        $post->media = $fileName; 
+        $post->media = $filePath; 
         $post->save();
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');

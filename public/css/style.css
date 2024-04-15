@@ -223,11 +223,16 @@ body{
 
         .post-media{
             width: 100%;
+            border-radius: 20px;
             background: #8e8e8e23;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
             .post-media img{
                 width: 100%;
+                border-radius: 10px;
             }
 
         .post-foot{

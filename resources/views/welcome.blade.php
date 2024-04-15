@@ -110,8 +110,7 @@
 
                             @if ($post->media)
                                 <div class="post-media">
-                                
-                                    <img src={{ url("images").'\\' .$post->media}} alt={{url("images").'\\' .$post->media}}>
+                                    <img src="{{ asset($post->media) }}">
                                 </div>
                             @endif
                                     
