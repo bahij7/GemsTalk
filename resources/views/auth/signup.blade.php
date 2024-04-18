@@ -14,7 +14,7 @@
     <div class="form-container">
         <x-auth-session-status :status="session('status')" />
     
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('signup') }}">
             <div class="login-head"><a href="/">💎 GemsTalk</a></div>
     
             @csrf

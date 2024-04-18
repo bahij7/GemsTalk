@@ -17,7 +17,7 @@
                     @if(auth()->check())
                     <p style="font-size: 20px">Welcome<br/> <span style="font-weight:700">{{ auth()->user()->name }}</span> 👋</p>
                 @else
-                    <p>Guest Account <a href="/login">Login</a> or <a href="/register">Sign up</a></p>
+                    <p>Guest Account <a href="/login">Login</a> or <a href="/signup">Sign up</a></p>
                 @endif
                 </div>
 

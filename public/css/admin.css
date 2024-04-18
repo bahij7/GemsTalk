@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body{
+    background: #0B0B0B;
+    color: white;
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+::-webkit-scrollbar-track {
+    background: #f5f5f514; 
+  }
+  
+::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+
+  .container{
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.sidebar{
+    width: 25%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    border-right: 1px solid #f5f5f526 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 10px;
+    box-sizing: border-box;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    height: 10%;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+    .logo a{
+        text-decoration: none;
+        color: white;
+    }
+
+    
+    .auth{
+        display: flex;
+        align-items: center;
+        height: 15%;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 16px;
+        font-weight: 400;
+    }
+        .auth a{
+            color: white;
+        }
+    
+    .links{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 10px;
+        height: 75%;
+    }
+    
+        .section{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .section-head{
+            font-size: 14px;
+            color: #f5f5f5b8;
+            margin-bottom: 2%;
+        }
+        .section-links{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 98%;
+            box-sizing: border-box;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .section-links a{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            background: #f5f5f509;
+            border-radius: 5px;
+            padding: 10px 14px;
+            transition: .4s ease;
+        }
+        .section-links a:hover{
+            background: #f5f5f514;
+        }
+        .section-links i{
+            font-size: 14px;
+        }
+      
+    
+    .tag{
+        display: flex;
+        align-items: center;
+        height: 3%;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+.main{
+    width: 75%;
+}
+
+.main-body{
+    width: 90%;
+    margin: 0 auto;
+}

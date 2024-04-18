@@ -33,30 +33,26 @@ Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('post.de
 
 
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin/users', [UsersController::class, 'index']);
     Route::get('/admin', function () {
         return view('pages.admin.admin');
     });
+    Route::get('/admin/posts', function(){
+        return view('pages.admin.posts');
+    });
+    Route::get('/admin/comments', function(){
+        return view('pages.admin.comments');
+    });
+    Route::get('/admin/chat', function(){
+        return view('pages.admin.chat');
+    });
+    Route::get('/admin/categories', function(){
+        return view('pages.admin.categories');
+    });
 });
 
 
-
-
-
-
-Route::get('/admin/posts', function(){
-    return view('pages.admin.posts');
-});
-Route::get('/admin/comments', function(){
-    return view('pages.admin.comments');
-});
-Route::get('/admin/chat', function(){
-    return view('pages.admin.chat');
-});
-Route::get('/admin/categories', function(){
-    return view('pages.admin.categories');
-});
 
 
 
