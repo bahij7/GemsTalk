@@ -65,14 +65,19 @@
                     <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="create-body">
-                            <select name="category_id" required>
-                                <option value="">Select a category</option>
+                            <textarea name="content" placeholder="Start typing your post...*" required></textarea>
+                            
+                            <select name="category_id">
+                                <option value="">Select a category*</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <textarea name="content" placeholder="Start typing your post..." required></textarea>
+                            
+                            <label>Add a Link</label>
+                            <input type="text" name="link" placeholder="e.g. https://www.bahij.xyz"/>
                             <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>
+                            
                         </div>
 
                         <div class="create-foot">

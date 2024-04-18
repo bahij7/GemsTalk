@@ -56,22 +56,21 @@
             
             
             <div class="main">
-                <div class="message">
-                    <form  method="POST" action="{{ route('chat.store') }}">
-                        @csrf
-                        <input type="text" name='content' placeholder="Type a Message" required/>
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
                 
+                @auth
                 <div class="chats">
+                    
+                    <div class="chat-disclaimer">
+                        <p>Respect Rules: Be Kind, Chat Mindfully!</p>
+                    </div>
                     @if ($chats->isEmpty())
                         <p>No Chat.</p>
                     @else
 
                     @foreach($chats as $chat)
-                    <div class="chat">
-                        <div class="chat-head">{{ $chat->user->name }}</div>
+                    <div class="chat {{ $chat->user_id === auth()->id() ? 'self-chat' : '' }}">
+                        <div class="chat-head" style="display: {{ auth()->check() && $chat->user_id == auth()->id() ? 'none' : '' }}"
+                            >{{ $chat->user->name }}</div>
                         <div class="chat-body">{{ $chat->content }}</div>
                         <div class="chat-foot">
                             <div>{{ $chat->created_at->format('d M Y, h:iA') }}</div>
@@ -81,7 +80,19 @@
                     @endif
                 </div>
 
+                <div class="message">
+                    <form  method="POST" action="{{ route('chat.store') }}">
+                        @csrf
+                        <input type="text" name='content' placeholder="Type a Message" required/>
+                        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+
+                @else
+                <div class="disclaimer">Login to interact with our community</div>
+                @endauth 
             </div>
+            
         </div>
 
 

@@ -18,7 +18,6 @@ class PostsController extends Controller
     {
         
         $request->validate([
-            'category_id' => 'required',
             'content' => 'required',
             'media' => 'nullable|mimes:png,jpg,jpeg,pdf,doc,docx,pptx,xlsx|max:20480',
         ]);
@@ -37,10 +36,22 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
         $post->content = $request->content;
         $post->media = $filePath; 
+        $post->link = $request->link; 
         $post->save();
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
 
+    }
+
+    public function destroy($postId)
+    {
+    $post = Post::find($postId);
+    if ($post) {
+        $post->is_deleted = true;
+        $post->save();
+        return redirect()->back()->with('success', 'Post deleted successfully!');
+    }
+    return redirect()->back()->with('error', 'Error deleting post!');
     }
 
 }

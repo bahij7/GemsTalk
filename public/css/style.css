@@ -55,6 +55,11 @@ body{
     font-weight: 700;
 }
 
+    .logo a{
+        text-decoration: none;
+        color: white;
+    }
+    
 .auth{
     display: flex;
     align-items: center;
@@ -154,6 +159,34 @@ body{
     width: 100%;
 }
 
+.popup{
+    background: #00753b;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #07c164;
+    animation: popup 5s forwards 1s;
+    opacity: 0;
+    z-index: 100;
+    top: 20px;
+    position: fixed;
+}
+
+@keyframes popup{
+    0%{
+        opacity: 0%;
+    }
+    30%{
+        opacity: 100%;
+    }
+    70%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+        display: none;
+    }
+}
+
 .posts{
     width: 90%;
     margin: 0 auto;
@@ -213,6 +246,14 @@ body{
             font-size: 12px;
             font-weight: normal;
             color: #f5f5f5b8;
+        }
+
+        .post-info form{
+            all: unset;
+        }
+        .post-link a{
+            color: #f5f5f5b8;
+            font-size: 14px;
         }
 
         .post-body{
@@ -400,7 +441,8 @@ form{
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 10px;
+        font-size: 14px;
     }
 
     .create-body select{
@@ -436,6 +478,15 @@ form{
     .create-body textarea:focus{
         outline: 1px solid #8e8e8e23;
     }
+
+    .create-body input[type='file']::file-selector-button {
+        border: 1px solid #8e8e8e23;
+        border-radius: 6px;
+        padding: 6px 14px;
+        background-color: #8e8e8e23;
+        color: white;
+        transition: 1s;
+      }
 
     .create-foot{
         width: 90%;
@@ -475,16 +526,45 @@ form{
     box-sizing: border-box;
 }
 
+.chat-disclaimer{
+    border-bottom: 1px solid #8e8e8e23;
+}
 
-    .message{
-        width: 90%;
-        margin: 0 auto;
-        box-sizing: border-box;
-        z-index: 100;
-    }
+.message{
+    width: 90%;
+    padding: 6px 0px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    z-index: 100;
+    position: sticky;
+    bottom: 10px;
+    background: #0B0B0B;
+    box-shadow: 0px 0px 20px #0B0B0B;
+}
 
     .message form{
        all: unset;
+       width: 100%;
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+    }
+
+    
+    .message input{
+        width: 91%;
+    }
+
+    .message button{
+        all: unset;
+        width: 8%;
+        background: #0179D1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0px;
+        border-radius: 6px;
+        cursor: pointer;
     }
 
     .chat{
@@ -509,6 +589,14 @@ form{
         padding: 10px;
         box-sizing: border-box;
         border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .self-chat{
+        align-self: end;
+    }
+    .self-chat .chat-body{
+        background: #8e8e8e23;
     }
 
     .chat-foot{
@@ -516,7 +604,13 @@ form{
         color: #f5f5f5b8;
     }
 
-
+.disclaimer{
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 @media only screen and (max-width: 805px) {

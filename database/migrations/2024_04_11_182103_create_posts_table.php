@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->default(1);
+            $table->foreignId('category_id')->constrained('categories')->default(1)->nullable();
             $table->text('content');
             $table->string('media')->nullable();
+            $table->string('link')->nullable();
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

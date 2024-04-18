@@ -38,7 +38,7 @@
                             <a href="/profile"><i class="fa-regular fa-circle-user"></i> Profile</a>
 
                             @if(auth()->check() && auth()->user()->role === 'admin')
-                                <a href="/admin/dashboard"><i class="fa-solid fa-key"></i> Administration</a>
+                                <a href="/admin"><i class="fa-solid fa-key"></i> Administration</a>
                             @endif
 
                             <a href="/posts"><i class="fa-regular fa-note-sticky"></i> My Posts</a>
@@ -72,18 +72,20 @@
                     <div class="posts">
         
                         @if(session()->has('success'))
-                            <div class="alert alert-success">
+                            <div class="popup">
                                 {{ session()->get('success') }}
                             </div>
                         @endif
 
+                        @foreach($posts->reverse() as $post)
+                    @if (!$post->is_deleted)
                         @if ($posts->isEmpty())
                             <p>No posts found.</p>
-                    @else
-                        @foreach($posts->reverse() as $post)
+                        @else
 
+                        
+                        
                             <div class="post">
-
                                 <div class="post-head">
 
                                     <div class="post-info">
@@ -91,7 +93,13 @@
                                         <span>
                                             @if(auth()->check() && $post->user_id == auth()->id())
                                             <button><i class="fa-regular fa-pen-to-square"></i></button>
-                                            <button><i class="fa-solid fa-trash"></i></button>
+                                            @if(!$post->is_deleted)
+                                            <form action="{{ route('post.delete', $post->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                                              </form>
+                                              @endif
                                             @endif
                                             {{ $post->category->name }}
                                         </span>
@@ -108,20 +116,27 @@
                                     {{ $post->content }}
                                 </div>
 
-                            @if ($post->media)
+                                @if ($post->link)
+                                <div class="post-link">
+                                    <a href="{{$post->link}}" target="_blank">{{$post->link}}</a>
+                                </div>
+                                @endif
+
+                                @if ($post->media)
                                 <div class="post-media">
                                     <img src="{{ asset($post->media) }}">
                                 </div>
-                            @endif
+                                @endif
                                     
                                 <div class="post-foot">
                                     <button><i class="fa-solid fa-comment"></i></button>
                                     <button><i class="fa-solid fa-share-from-square"></i></button>
                                 </div>
-                            </div>
 
+                            </div>
+                            @endif
+                            @endif
                             @endforeach
-                        @endif
                         
 
                     </div>

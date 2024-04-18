@@ -4,6 +4,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckAuth;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CreatePostController;
@@ -27,11 +28,37 @@ Route::get('/posts', function () {
 Route::get('/', [PostsController::class, 'index'])->name('posts.index');
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 Route::get('/posts/create', [CreatePostController::class, 'create'])->name('posts.create')->middleware([CheckAuth::class]);
+Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('post.delete');
 
 
-Route::get('/admin/dashboard', function () {
-    return view('pages.admin.admin_dashboard');
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/admin/users', [UsersController::class, 'index']);
+    Route::get('/admin', function () {
+        return view('pages.admin.admin');
+    });
 });
+
+
+
+
+
+
+Route::get('/admin/posts', function(){
+    return view('pages.admin.posts');
+});
+Route::get('/admin/comments', function(){
+    return view('pages.admin.comments');
+});
+Route::get('/admin/chat', function(){
+    return view('pages.admin.chat');
+});
+Route::get('/admin/categories', function(){
+    return view('pages.admin.categories');
+});
+
+
 
 
 Route::get('/dashboard', function () {
