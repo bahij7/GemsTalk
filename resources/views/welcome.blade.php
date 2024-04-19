@@ -11,7 +11,7 @@
     </head>
     <body>
             <div class="sidebar">
-                <div class="logo">💎 GemsTalk</div>
+                <div class="logo"><a href="/">💎 GemsTalk</a></div>
 
                 <div class="auth">
                     @if(auth()->check())
@@ -26,8 +26,11 @@
                         <div class="section-head">Discovery</div>
                         <div class="section-links">
                             <a href="/"><i class="fa-solid fa-house"></i>Feed</a>
-                            <a href="/topics"><i class="fa-regular fa-star"></i>Topic-Specific</a>
                             <a href="/chat"><i class="fa-regular fa-message"></i>Chat</a>
+                            @if(auth()->check())
+                            <a href="/posts"><i class="fa-regular fa-note-sticky"></i> My Posts</a>
+                            @endif
+
                         </div>
                     </div> 
 
@@ -40,8 +43,6 @@
                             @if(auth()->check() && auth()->user()->role === 'admin')
                                 <a href="/admin"><i class="fa-solid fa-key"></i> Administration</a>
                             @endif
-
-                            <a href="/posts"><i class="fa-regular fa-note-sticky"></i> My Posts</a>
                             
                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -72,8 +73,14 @@
                     <div class="posts">
         
                         @if(session()->has('success'))
-                            <div class="popup">
+                            <div class="popup success">
                                 {{ session()->get('success') }}
+                            </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                            <div class="popup danger">
+                                {{ session()->get('error') }}
                             </div>
                         @endif
 
@@ -129,8 +136,7 @@
                                 @endif
                                     
                                 <div class="post-foot">
-                                    <button><i class="fa-solid fa-comment"></i></button>
-                                    <button><i class="fa-solid fa-share-from-square"></i></button>
+                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments</a>
                                 </div>
 
                             </div>

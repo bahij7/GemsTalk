@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -14,6 +15,13 @@ class PostsController extends Controller
         return view('welcome', ['posts' => $posts]);
     }
 
+    public function myposts()
+    {
+        $user = Auth::user();
+        $posts = $user->posts()->get();
+        return view('pages.posts', ['posts' => $posts]);
+    }
+    
     public function store(Request $request)
     {
         
@@ -39,19 +47,33 @@ class PostsController extends Controller
         $post->link = $request->link; 
         $post->save();
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
+        return redirect('/')->with('success', 'Post created successfully!');
 
     }
 
     public function destroy($postId)
     {
-    $post = Post::find($postId);
-    if ($post) {
-        $post->is_deleted = true;
-        $post->save();
-        return redirect()->back()->with('success', 'Post deleted successfully!');
+        $post = Post::find($postId);
+        if ($post) {
+            $post->is_deleted = true;
+            $post->save();
+            return redirect()->back()->with('success', 'Post deleted successfully!');
+        }
+
+        return redirect()->back()->with('error', 'Error deleting post!');
     }
-    return redirect()->back()->with('error', 'Error deleting post!');
+
+    public function show($id)
+    {
+        $post = Post::with('comments')->findOrFail($id);
+
+        return view('pages.show', compact('post'));
+    }
+
+    public function adminPost()
+    {
+        $posts = Post::all();
+        return view('pages.admin.posts', ['posts' => $posts]);
     }
 
 }

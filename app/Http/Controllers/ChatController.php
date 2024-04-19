@@ -10,15 +10,14 @@ class ChatController extends Controller
 
     public function index()
     {
-        $chats = Chat::latest()->get();
+        $chats = Chat::all();
         return view('pages.chat', compact('chats'));
     }
-
 
     public function store(Request $request)
     {
     $request->validate([
-        'content' => 'required|string|max:255',
+        'content' => 'required|string',
     ]);
 
     $chat = new Chat();
@@ -30,5 +29,12 @@ class ChatController extends Controller
 
     return redirect()->back()->with('success', 'Message sent successfully!');
     }
+
+    public function adminChat()
+    {
+        $chats = Chat::latest()->get();
+        return view('pages.admin.chat', compact('chats'));
+    }
+
 
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 use App\Models\Post;
 use App\Models\Chat;
+use App\Models\Comments;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -57,6 +58,11 @@ class User extends Authenticatable
     public function chats()
     {
         return $this->hasMany(Chat::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
     }
 
 }

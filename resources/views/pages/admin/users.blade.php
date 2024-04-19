@@ -29,7 +29,7 @@
                         <a href="/admin/posts"><i class="fa-regular fa-note-sticky"></i>Posts</a>
                         <a href="/admin/chat"><i class="fa-regular fa-message"></i>Chats</a>
                         <a href="/admin/comments"><i class="fa-regular fa-comment"></i>Comments</a>
-                        <a href="/admin/comments"><i class="fa-regular fa-comment"></i>Categories</a>
+                        <a href="/admin/categories"><i class="fa-regular fa-comment"></i>Categories</a>
                         
                     </div>
                 </div> 
@@ -38,16 +38,18 @@
             </div>
             <div class="tag">Ahmed Bahij © 2024</div>
         </div>
-
         <div class="container">
             
             <div class="main">
                 
                 <div class="main-body">
 
+                    
+                
+
                     <table>
                         <tr><th>Name</th><th>Email</th><th>Role</th><th>Date of Birth</th><th>Date of Join</th><th>Actions</th></tr>
-                            @foreach ($users as $user)
+                            @foreach ($users->reverse() as $user)
                         <tr><td>{{ $user->name }}</td><td>{{ $user->email }}</td><td>{{ $user->role }}</td><td>{{ $user->date_of_birth }}</td><td>{{ $user->created_at }}</td><td><button>Role</button><button>Delete</button></td></tr>
                             @endforeach
                     </table>

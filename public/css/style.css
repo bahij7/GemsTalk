@@ -163,12 +163,20 @@ body{
     background: #00753b;
     padding: 10px;
     border-radius: 6px;
-    border: 1px solid #07c164;
+    border: 1px solid #8e8e8e23;
     animation: popup 5s forwards 1s;
     opacity: 0;
     z-index: 100;
     top: 20px;
     position: fixed;
+}
+
+.danger{
+    background: #c9061d;
+}
+
+.success{
+    background: #00753b;
 }
 
 @keyframes popup{
@@ -287,8 +295,9 @@ body{
             gap: 4px;
         }
 
-        .post-foot button{
+        .post-foot a{
             all: unset;
+            text-decoration: none;
             background: #f5f5f509;
             border: 1px solid #8e8e8e23;
             font-size: 12px;
@@ -595,8 +604,9 @@ form{
     .self-chat{
         align-self: end;
     }
-    .self-chat .chat-body{
-        background: #8e8e8e23;
+
+    .self-chat .chat-foot{
+        text-align: end;
     }
 
     .chat-foot{
@@ -612,6 +622,25 @@ form{
     justify-content: center;
 }
 
+.post-comments{
+    margin-top: 2%;
+}
+
+    .post-comments form{
+        all: unset;
+        width: 100%;
+    }
+
+
+    .post-comment{
+        margin-top: 2%;
+        background: #8e8e8e23;
+        border: 1px solid #8e8e8e23;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        font-size: 14px;
+    }
 
 @media only screen and (max-width: 805px) {
 
