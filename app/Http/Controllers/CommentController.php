@@ -25,4 +25,10 @@ class CommentController extends Controller
 
         return redirect()->back()->with('success', 'Comment added successfully!');
     }
+
+    public function adminComment()
+    {
+        $comments = Comments::with('post', 'user')->get();
+        return view('pages.admin.comments', compact('comments'));
+    }
 }

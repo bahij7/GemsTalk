@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('content');
             $table->string('media')->nullable();
             $table->string('link')->nullable();
-            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

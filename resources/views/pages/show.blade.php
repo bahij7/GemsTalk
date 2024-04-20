@@ -64,24 +64,13 @@
             
             <div class="main">
                 <div class="main-body" style="width: 90%; margin: 0 auto;">
+                    
                 <div class="post">
                     <div class="post-head">
 
                         <div class="post-info">
                             <span>{{ $post->user->name }}</span>
-                            <span>
-                                @if(auth()->check() && $post->user_id == auth()->id())
-                                <button><i class="fa-regular fa-pen-to-square"></i> Edit Post</button>
-                                @if(!$post->is_deleted)
-                                <form action="{{ route('post.delete', $post->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fa-solid fa-trash"></i> Delete Post</button>
-                                  </form>
-                                  @endif
-                                @endif
-                                {{ $post->category->name }}
-                            </span>
+                            <span>{{ $post->category->name }}</span>
                         </div>
 
                         <div class="post-time">
@@ -113,40 +102,68 @@
 
                 </div>
 
+            
+
                 <div class="post-comments">
 
                     @if(session()->has('success'))
-                            <div class="popup success">
-                                {{ session()->get('success') }}
-                            </div>
-                        @endif
-
-                    @if(Auth()->check())
-                    <div class="post-comment-field">
-                        <form action="{{ route('comments.store', ['post_id' => $post->id]) }}" method="POST">
-                            @csrf
-                            <input type="text" placeholder="Add a Comment" name="content"/>
-                            <input type="submit" value="Send" />
-                        </form>
-                    </div>
+                        <div class="popup success">
+                            {{ session()->get('success') }}
+                        </div>
                     @endif
+
+                    
+
+                    
+
                     @if($post->comments)
                     
-                    @foreach ($post->comments->reverse() as $comment)
-                    <div class="post-comment">
-            
-                        {{-- <div class="comment-top"><b>Ahmed BAHIJ</b> WA3R ASAHBI KEEP PUSHING</div>
-                        <div class="comment-bottom" style="font-size: 10px; color: #f5f5f5b8">
-                            2024-04-19 08:46:55
-                        </div> --}}
-                        <div class="comment-top"><b>{{$comment->user->name}}</b> {{$comment->content}}</div>
-                        <div class="comment-bottom" style="font-size: 10px; color: #f5f5f5b8">{{$comment->comment_date}}</div>
-                    </div>
-                    @endforeach
+                    <div class="comments">
 
-                    
-                @else <p>No Comments Yet</p>
-                @endif
+                        @if(Auth()->check())
+                        <div class="post-comment">
+
+                            <form action="{{ route('comments.store', ['post_id' => $post->id]) }}" method="POST">
+                                @csrf
+                                <input type="text" placeholder="Add a Comment" name="content"/>
+                                <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                        @endif
+
+                    @endif
+
+                        @foreach ($post->comments->reverse() as $comment)
+            
+                        <div class="comment">
+                            <div class="comment-top">
+                                <div><b>{{$comment->user->name}}</b></div>
+                                <div>
+                                    {{-- @if(auth()->check() && $comment->user_id == auth()->id())
+                                            <form action="" method="POST" style="all: unset">
+                                                @csrf
+                                                <button type="submit" style="all:unset;color: #c61025; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                                              </form>
+                                    @endif --}}
+                                              
+                                </div>
+                            </div>
+                            <div class="comment-body">
+                                <div class="content">{{$comment->content}}</div>
+                            </div>
+
+                            <div class="comment-bottom" style="font-size: 10px; color: #f5f5f5b8">
+                                {{ \Carbon\Carbon::parse($comment->comment_date)->format('j M Y, H:i') }}
+                            </div>
+                        </div>
+
+                        
+
+                       @endforeach
+                    </div>
+
+                
+
                 </div>
             </div>
         </div>

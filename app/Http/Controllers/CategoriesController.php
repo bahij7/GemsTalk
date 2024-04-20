@@ -12,4 +12,19 @@ class CategoriesController extends Controller
         $categories = Category::all();
         return view('pages.admin.categories', compact('categories'));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:categories|max:255',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        
+        $category->save();
+
+        return redirect('/admin/categories')->with('success', 'Category created successfully!');
+    }
+
 }

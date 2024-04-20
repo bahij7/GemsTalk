@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\Post;
+use App\Models\Comments;
 
 class DashboardController extends Controller
 {
@@ -20,12 +21,15 @@ class DashboardController extends Controller
         
         $allChats = Chat::count();
 
+        $allComments = Comments::count();
+
+
 
         $users = User::latest()->take(3)->get();
 
         $chats = Chat::latest()->take(5)->get();
 
-        return view('pages.admin.admin', compact('allPosts', 'allUsers','allChats', 'users', 'chats'));
+        return view('pages.admin.admin', compact('allPosts', 'allUsers', 'allChats', 'allComments', 'users', 'chats'));
     }
 
 
@@ -36,6 +40,7 @@ class DashboardController extends Controller
             'allPosts' => Post::count(),
             'allUsers' => User::count(),
             'allChats' => Chat::count(),
+            'allComments' => Comments::count(),
             'users' => User::latest()->take(3)->get(),
             'chats' => Chat::latest()->take(5)->get(),
         ];

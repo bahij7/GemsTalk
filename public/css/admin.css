@@ -24,7 +24,53 @@ body{
     background: #555; 
   }
 
+  .popup{
+    width: 100%;
+    background: #8e8e8e23;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 2%;
+    border-radius: 6px;
+    border: 1px solid #8e8e8e23;
+    animation: popup 5s forwards 1s;
+    opacity: 0;
+    z-index: 100;
 
+}
+
+.danger{
+    background: #c9061d;
+}
+
+.success{
+    background: #00753b;
+}
+
+@keyframes popup{
+    0%{
+        opacity: 0%;
+    }
+    30%{
+        opacity: 100%;
+    }
+    70%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0%;
+        display: none;
+    }
+}
+
+input[type='text']{
+    all: unset;
+    width: 100%;
+    background: #8e8e8e23;
+    border-radius: 6px;
+    padding: 10px 8px;
+    box-sizing: border-box;
+    cursor: auto;
+}
 
   .container{
     width: 100%;
@@ -148,7 +194,7 @@ body{
     .main-head div{
         background: #8e8e8e23;
         border: 1px solid #8e8e8e23;
-        width: 30%;
+        width: 20%;
         padding: 6px 25px;
         border-radius: 10px;
         box-sizing: border-box;

@@ -22,14 +22,15 @@
 
             <div class="links" style="justify-content: start">
                 <div class="section">
-                    <div class="section-head">General</div>
+                    <div class="section-head">Administration</div>
                     <div class="section-links">
                         <a href="/admin"><i class="fa-solid fa-house"></i>Dashboard</a>
+                        <a href="/admin/admins"><i class="fa-solid fa-user-tie"></i>Admins</a>
                         <a href="/admin/users"><i class="fa-solid fa-users"></i>Users</a>
                         <a href="/admin/posts"><i class="fa-regular fa-note-sticky"></i>Posts</a>
                         <a href="/admin/chat"><i class="fa-regular fa-message"></i>Chats</a>
                         <a href="/admin/comments"><i class="fa-regular fa-comment"></i>Comments</a>
-                        <a href="/admin/categories"><i class="fa-regular fa-comment"></i>Categories</a>
+                        <a href="/admin/categories"><i class="fa-solid fa-list"></i>Categories</a>
                         
                     </div>
                 </div> 
@@ -44,15 +45,44 @@
             <div class="main">
                 
                 <div class="main-body">
-                    <button>New Category</button>
+                        
+                @if(session()->has('success'))
+                <div class="popup success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+
+            @if(session()->has('error'))
+                <div class="popup danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+           
+            @if ($categories->isEmpty())
+                <p>No Categories.</p>
+            @else
+
+            <p style="font-size: 12px">TOTAL CATEGORIES ({{$categories->count()}})</p>
+
+            <form method="POST" action="{{ route('categories.store') }}" style="margin-top: 2%; margin-bottom: 2%">
+                @csrf
+                <input type="text" name="name" placeholder="Category's Name" style="margin-bottom: 6px"/>   
+                <button type="submit">Create a new Category</button>
+            </form>
+            
 
                     <table>
                         <tr><th>Category</th><th>Actions</th></tr>
                             @foreach ($categories as $category)
-                        <tr><td style="width: 80%">{{ $category->name }}</td><td style="width: 20%"><button>Edit</button><button>Delete</button></td></tr>
+                        <tr><td style="width: 80%; font-weight: 500;">{{ $category->name }}</td><td style="width: 20%">
+                            <form method="POST" action="{{ route('admincategory.delete', $category->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form></td></tr>
                             @endforeach
                     </table>
-
+                @endif
                 </div>
 
             </div>

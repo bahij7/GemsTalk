@@ -74,7 +74,7 @@
                         <div class="create-body">
                             <textarea name="content" placeholder="Start typing your post...*" required></textarea>
                             
-                            <select name="category_id">
+                            <select name="category_id" required>
                                 <option value="">Select a category*</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>

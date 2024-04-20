@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>GemsTalk - Administration</title>
+        <title>Admins - GemsTalk</title>
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
+ 
         <div class="sidebar">
             <div class="logo"><a href="/">💎 GemsTalk</a></div>
 
@@ -38,70 +39,55 @@
             </div>
             <div class="tag">Ahmed Bahij © 2024</div>
         </div>
+        <div class="container">
+            
+            <div class="main">
+               
+                <div class="main-body">
 
-    <div class="container">
-        
-        <div class="main">
-            <div class="main-head">
-
-                <div class="users">
-                    <p>All Users</p>
-                    <h1>{{$allUsers}}</h1>
+                        
+                @if(session()->has('success'))
+                <div class="popup success">
+                    {{ session()->get('success') }}
                 </div>
+            @endif
 
-                <div class="posts">
-                    <p>All Posts</p>
-                    <h1>{{$allPosts}}</h1>
+            @if(session()->has('error'))
+                <div class="popup danger">
+                    {{ session()->get('error') }}
                 </div>
+            @endif
+           
+            @if ($users->isEmpty())
+                <p>No Chat.</p>
+            @else
 
-                <div class="comments">
-                    <p>All Comments</p>
-                    <h1>{{$allComments}}</h1>
-                </div>
+            <p style="font-size: 12px">TOTAL USERS ({{$users->count()}})</p>
                 
-                <div class="chats">
-                    <p>All Messages</p>
-                    <h1>{{$allChats}}</h1>
-                </div>
-
-            </div>
-
-            <div class="main-body" style="width: 90%; display: flex; flex-direction: column; gap: 20px">
-
-                <div class="recentUsers">
-                    <p>Latest Joined Users</p>
-                    <table>
-                        <tr><th>Name</th><th>Email</th><th>Role</th><th>Date</th></tr>
-                        
-                            @foreach ($users as $user)
-                        <tr><td style="width: 20%">{{ $user->name }}</td><td style="width: 40%">{{ $user->email }}</td><td style="width: 20%">{{ $user->role }}</td><td>{{$user->created_at}}</td></tr>
-                            @endforeach
-                    </table>
-                </div>
-
-                <div class="recentChats">
-                    <p>Latest Messages</p>
 
                     <table>
-                        <tr><th>Sender</th><th>Message</th><th>Date</th></tr>
-                        
-                            @foreach ($chats as $chat)
-                        <tr><td style="width: 20%">{{ $chat->user->name }}</td><td style="width: 60%">{{ $chat->content }}</td><td>{{$chat->chat_date}}</td></tr>
+                        <tr><th>Name</th><th>Email</th><th>Role</th><th>Date of Birth</th><th>Date of Join</th><th>Actions</th></tr>
+                            @foreach ($users->reverse() as $user)
+                        <tr><td>{{ $user->name }}</td><td>{{ $user->email }}</td><td>{{ $user->role }}</td><td>{{ $user->date_of_birth }}</td><td>{{ $user->created_at }}</td>
+                            <td>
+                                <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" style="background: #8e8e8e23">Change Role</button>
+                                </form>
+                            </td>
+                        </tr>
                             @endforeach
                     </table>
+                @endif
                 </div>
-
-                <a href="{{url('/admin/download-pdf')}}">Download Stats</a>
-
 
             </div>
 
         </div>
-
-    </div>
-    
+        
 
 
 
-</body>
+    </body>
 </html>

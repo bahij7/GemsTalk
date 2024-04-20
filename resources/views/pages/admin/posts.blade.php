@@ -22,14 +22,15 @@
 
             <div class="links" style="justify-content: start">
                 <div class="section">
-                    <div class="section-head">General</div>
+                    <div class="section-head">Administration</div>
                     <div class="section-links">
                         <a href="/admin"><i class="fa-solid fa-house"></i>Dashboard</a>
+                        <a href="/admin/admins"><i class="fa-solid fa-user-tie"></i>Admins</a>
                         <a href="/admin/users"><i class="fa-solid fa-users"></i>Users</a>
                         <a href="/admin/posts"><i class="fa-regular fa-note-sticky"></i>Posts</a>
                         <a href="/admin/chat"><i class="fa-regular fa-message"></i>Chats</a>
                         <a href="/admin/comments"><i class="fa-regular fa-comment"></i>Comments</a>
-                        <a href="/admin/categories"><i class="fa-regular fa-comment"></i>Categories</a>
+                        <a href="/admin/categories"><i class="fa-solid fa-list"></i>Categories</a>
                         
                     </div>
                 </div> 
@@ -45,8 +46,24 @@
                 
                 <div class="main-body">
 
-                    
-                
+                        
+            @if(session()->has('success'))
+                <div class="popup success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+
+            @if(session()->has('error'))
+                <div class="popup danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+           
+            @if ($posts->isEmpty())
+                <p>No Posts.</p>
+            @else
+
+            <p style="font-size: 12px">TOTAL POSTS ({{$posts->count()}})</p>
 
                     <table>
                         <tr><th>Creator</th><th>Content</th><th>Category</th><th>Media</th><th>Link</th><th>is Deleted?</th><th>Published at</th><th>Actions</th></tr>
@@ -54,10 +71,25 @@
                            
                         
                             @foreach ($posts->reverse() as $post)
-                        <tr><td style="width: 15%">{{ $post->user->name }}</td><td style="width: 20%">{{ $post->content }}</td><td style="width: 10%">{{ $post->category->name }}</td><td style="width: 10%">@if($post->media)<i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td><td style="width: 10%">@if($post->link) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td><td style="width: 10%">@if($post->is_deleted) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td><td>{{$post->created_at}}</td><td><button>Delete</button></td></tr>
+                        <tr>
+                            <td style="width: 15%">{{$post->user->name}}</td>
+                            <td style="width: 20%">{{ $post->content }}</td>
+                            <td style="width: 10%">{{ $post->category->name }}</td>
+                            <td style="width: 10%">@if($post->media)<i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
+                            <td style="width: 10%">@if($post->link) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
+                            <td style="width: 10%">@if($post->is_deleted) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
+                            <td>{{$post->created_at}}</td>
+                            <td>
+                                <form method="POST" action="{{ route('adminpost.delete', $post->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                             @endforeach
                     </table>
-
+                @endif
                 </div>
 
             </div>

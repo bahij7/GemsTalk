@@ -12,4 +12,12 @@ class UsersController extends Controller
         $users = User::all();
         return view('pages.admin.users', ['users' => $users]);
     }
+
+    public function admins()
+    {
+        $adminUsers = User::where('role', 'admin')->get();
+        
+        return view('pages.admin.admins', ['users' => $adminUsers]);
+    }
+
 }

@@ -70,10 +70,7 @@
                     <div class="chat-disclaimer">
                         <p>Respect Rules: Be Kind, Chat Mindfully!</p>
                     </div>
-                    @if ($chats->isEmpty())
-                        <p>No Chat.</p>
-                    @else
-
+                    
                     @foreach($chats->reverse() as $chat)
                     <div class="chat {{ $chat->user_id === auth()->id() ? 'self-chat' : '' }}">
                         <div class="chat-head" style="display: {{ auth()->check() && $chat->user_id == auth()->id() ? 'none' : '' }}"
@@ -84,7 +81,6 @@
                         </div>
                     </div>
                     @endforeach
-                    @endif
                 </div>
 
                 <div class="message">

@@ -22,14 +22,15 @@
 
             <div class="links" style="justify-content: start">
                 <div class="section">
-                    <div class="section-head">General</div>
+                    <div class="section-head">Administration</div>
                     <div class="section-links">
                         <a href="/admin"><i class="fa-solid fa-house"></i>Dashboard</a>
+                        <a href="/admin/admins"><i class="fa-solid fa-user-tie"></i>Admins</a>
                         <a href="/admin/users"><i class="fa-solid fa-users"></i>Users</a>
                         <a href="/admin/posts"><i class="fa-regular fa-note-sticky"></i>Posts</a>
                         <a href="/admin/chat"><i class="fa-regular fa-message"></i>Chats</a>
                         <a href="/admin/comments"><i class="fa-regular fa-comment"></i>Comments</a>
-                        <a href="/admin/categories"><i class="fa-regular fa-comment"></i>Categories</a>
+                        <a href="/admin/categories"><i class="fa-solid fa-list"></i>Categories</a>
                         
                     </div>
                 </div> 
@@ -41,19 +42,49 @@
         <div class="container">
             
             <div class="main">
-                
+               
                 <div class="main-body">
 
-                    
+                        
+                @if(session()->has('success'))
+                <div class="popup success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+
+            @if(session()->has('error'))
+                <div class="popup danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
+           
+            @if ($users->isEmpty())
+                <p>No Chat.</p>
+            @else
+
+            <p style="font-size: 12px">TOTAL USERS ({{$users->count()}})</p>
                 
 
                     <table>
                         <tr><th>Name</th><th>Email</th><th>Role</th><th>Date of Birth</th><th>Date of Join</th><th>Actions</th></tr>
                             @foreach ($users->reverse() as $user)
-                        <tr><td>{{ $user->name }}</td><td>{{ $user->email }}</td><td>{{ $user->role }}</td><td>{{ $user->date_of_birth }}</td><td>{{ $user->created_at }}</td><td><button>Role</button><button>Delete</button></td></tr>
+                        <tr><td>{{ $user->name }}</td><td>{{ $user->email }}</td><td>{{ $user->role }}</td><td>{{ $user->date_of_birth }}</td><td>{{ $user->created_at }}</td>
+                            <td>
+                                <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" style="background: #8e8e8e23">Change Role</button>
+                                </form>
+                                <form method="POST" action="{{ route('adminuser.delete', $user->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                             @endforeach
                     </table>
-
+                @endif
                 </div>
 
             </div>

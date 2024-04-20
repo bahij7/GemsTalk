@@ -62,7 +62,77 @@
             
             
             <div class="main">
-                MyPosts
+                <div class="main-head">
+
+                    @if (auth()->check())
+                    <a href="/posts/create"><i class="fa-regular fa-square-plus"></i> New Post</a>
+                    @endif
+
+                </div>
+                <div class="main-body" style="width: 90%; margin: 0 auto;">
+                    @if ($posts->isEmpty())
+                        <p>No posts found.</p>
+                    @else
+                    <p style="font-size: 12px">TOTAL POSTS ({{$posts->count()}})</p>
+                    
+                    
+                @foreach($posts->reverse() as $post)
+                
+                    
+
+                    
+                        <div class="post" style="margin-bottom: 2%;">
+                            <div class="post-head">
+                                <div class="post-info">
+                                    <span>{{ $post->user->name }}</span>
+                                    <span>
+                                        {{-- @if(auth()->check() && $post->user_id == auth()->id())
+                                        <a href="{{ route('post.edit', $post->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        
+                                        <form action="{{ route('post.delete', $post->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                                          </form>
+                                          @endif
+                                         --}}
+                                        {{ $post->category->name }}
+                                    </span>
+                                </div>
+
+                                <div class="post-time">
+                                    {{ $post->created_at->format('j M Y, H:i') }}
+                                </div>
+
+                            </div>
+                                
+
+                            <div class="post-body">
+                                {{ $post->content }}
+                            </div>
+
+                            @if ($post->link)
+                            <div class="post-link">
+                                <a href="{{$post->link}}" target="_blank">{{$post->link}}</a>
+                            </div>
+                            @endif
+
+                            @if ($post->media)
+                            <div class="post-media">
+                                <img src="{{ asset($post->media) }}">
+                            </div>
+                            @endif
+                                
+                            <div class="post-foot">
+                                <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
+                            </div>
+
+                        </div>
+                        
+                        
+                        @endforeach
+                        @endif
+                </div>
             </div>
 
 

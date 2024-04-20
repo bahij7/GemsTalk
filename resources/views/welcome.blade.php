@@ -98,16 +98,16 @@
                                     <div class="post-info">
                                         <span>{{ $post->user->name }}</span>
                                         <span>
-                                            @if(auth()->check() && $post->user_id == auth()->id())
-                                            <button><i class="fa-regular fa-pen-to-square"></i></button>
-                                            @if(!$post->is_deleted)
+                                            {{-- @if(auth()->check() && $post->user_id == auth()->id())
+                                            <a href="{{ route('post.edit', $post->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            
                                             <form action="{{ route('post.delete', $post->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"><i class="fa-solid fa-trash"></i></button>
                                               </form>
                                               @endif
-                                            @endif
+                                             --}}
                                             {{ $post->category->name }}
                                         </span>
                                     </div>
@@ -136,7 +136,7 @@
                                 @endif
                                     
                                 <div class="post-foot">
-                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments</a>
+                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
                                 </div>
 
                             </div>

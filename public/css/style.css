@@ -160,7 +160,7 @@ body{
 }
 
 .popup{
-    background: #00753b;
+    background: #8e8e8e23;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #8e8e8e23;
@@ -217,6 +217,9 @@ body{
         flex-direction: column;
         gap: 20px;
         box-sizing: border-box;
+        }
+    .post:last-child{
+        margin-bottom: 2%;
     }
 
         .post-head{
@@ -588,7 +591,7 @@ form{
 
     .chat-head{
         width: 100%;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .chat-body{
@@ -622,25 +625,75 @@ form{
     justify-content: center;
 }
 
-.post-comments{
+
+.comments{
     margin-top: 2%;
+    background: #8e8e8e23;
+    border: 1px solid #8e8e8e23;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 2%;
 }
 
-    .post-comments form{
+.comment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .comment-top{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .comment-body{
+       width: 95%;
+       margin-top: 6px;
+    }
+
+
+
+.comment:last-child{
+   border-bottom: none;
+}
+    .post-comment input{
+        width: 90%;
+    }
+
+    .post-comment input::placeholder{
+       font-size: 14px;
+    }
+    
+    .post-comment form{
         all: unset;
         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
+    .post-comment button{
+        all: unset;
+        width: 8%;
+        background: #0179D1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 
-    .post-comment{
-        margin-top: 2%;
-        background: #8e8e8e23;
-        border: 1px solid #8e8e8e23;
+    .comment{
+        border-bottom: 1px solid #8e8e8e23;
         padding: 10px;
         box-sizing: border-box;
-        border-radius: 10px;
         font-size: 14px;
     }
+
+
 
 @media only screen and (max-width: 805px) {
 
