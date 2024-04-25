@@ -62,15 +62,14 @@
             <div class="main">
                 <div class="main-head"> 
                 </div>
-
                 
                 <div class="main-body">
                     <div class="create">
                         <div class="create-head">
                             {{ auth()->user()->name }}
                         </div>
-                    <form method="POST" action="{{ route('posts.edit') }}" enctype="multipart/form-data">
-                        @csrf
+                        <form method="POST" action="{{ route('posts.update', ['id' => $post->id]) }}" enctype="multipart/form-data">
+                            @csrf
                         <div class="create-body">
                             <textarea name="content" placeholder="Start typing your post...*" required>{{$post->content}}</textarea>
                             
@@ -84,12 +83,19 @@
                             <label>Add a Link</label>
                             <input type="text" name="link" placeholder="e.g. https://www.bahij.xyz" value="{{$post->link}}"/>
                             <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>
+
+                            @if ($post->media)
+                            <p>Previous Image :</p>
+                                <div class="post-media">
+                                    <img src="{{ asset($post->media) }}">
+                                </div>
+                            @endif
                             
                         </div>
 
                         <div class="create-foot">
-                            <button type="button"><a href='/'>Cancel</a></button>
-                            <button type="submit">Post</button>
+                            <button type="button"><a href='/posts'>Cancel</a></button>
+                            <button type="submit">Saves Changes</button>
                         </div>
                     </form>
 

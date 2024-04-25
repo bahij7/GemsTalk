@@ -98,22 +98,12 @@
                                     <div class="post-info">
                                         <span>{{ $post->user->name }}</span>
                                         <span>
-                                            {{-- @if(auth()->check() && $post->user_id == auth()->id())
-                                            <a href="{{ route('post.edit', $post->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
-                                            
-                                            <form action="{{ route('post.delete', $post->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
-                                              </form>
-                                              @endif
-                                             --}}
                                             {{ $post->category->name }}
                                         </span>
                                     </div>
 
                                     <div class="post-time">
-                                        {{ $post->created_at->format('j M Y, H:i') }}
+                                        {{ $post->updated_at->format('j M Y, H:i') }}
                                     </div>
 
                                 </div>

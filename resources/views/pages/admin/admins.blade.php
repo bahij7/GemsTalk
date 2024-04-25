@@ -62,7 +62,7 @@
                 <p>No Chat.</p>
             @else
 
-            <p style="font-size: 12px">TOTAL USERS ({{$users->count()}})</p>
+            <p style="font-size: 12px">TOTAL ADMINS ({{$users->count()}})</p>
                 
 
                     <table>

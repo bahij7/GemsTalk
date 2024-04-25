@@ -31,6 +31,7 @@ Route::post('/posts/comments/{post_id}', [CommentController::class, 'store'])->n
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 Route::get('/posts/{id}', [PostsController::class, 'show'])->name('posts.show');
 Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
+Route::post('/posts/edit/{id}', [PostsController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.delete');
 
 
@@ -79,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
 });
 
 require __DIR__.'/auth.php';

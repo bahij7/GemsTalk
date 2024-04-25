@@ -54,17 +54,43 @@ class PostsController extends Controller
 
     }
 
-    public function edit(Request $request, $postId)
+    public function edit($id)
     {
-        $post = Post::find($postId);
-        if ($post) {
-       
-    
-            return redirect()->route('posts.edit', $post->id)->with('success', 'Post updated successfully!');
-        }
-    
-        return redirect()->back()->with('error', 'Post not found!');
+        // Find the post by its ID
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        
+        // Pass the post data to the edit view
+        return view('pages.edit', compact('post', 'categories'));
     }
+
+
+    public function update(Request $request, $id)
+    {
+        // Validation logic if needed
+        
+        $post = Post::findOrFail($id);
+        $post->content = $request->input('content');
+        $post->category_id = $request->input('category_id');
+        
+        if ($request->hasFile('media')) {
+            $file = $request->file('media');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->move('images', $fileName);
+            $post->media = 'images/' . $fileName;
+        }
+        
+
+        if ($request->input('link') != $post->link) {
+            $post->link = $request->input('link');
+        }
+        
+        $post->save();
+        
+        return redirect('/posts')->with('success', 'Post updated successfully');
+    }
+    
+
     
 
     public function destroy($postId)
@@ -72,7 +98,7 @@ class PostsController extends Controller
         $post = Post::find($postId);
         if ($post) {
             $post->delete(); 
-            return redirect('/')->with('success', 'Post deleted successfully!');
+            return redirect()->back()->with('success', 'Post deleted successfully!');
         }
     
         return redirect()->back()->with('error', 'Error deleting post!');

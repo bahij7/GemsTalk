@@ -83,7 +83,7 @@
                                 <form method="POST" action="{{ route('adminpost.delete', $post->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                                 </form>
                             </td>
                         </tr>
