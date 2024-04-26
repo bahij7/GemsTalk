@@ -241,3 +241,19 @@ table td{
     border-bottom: 1px solid #8e8e8e23;
 }
 
+
+.pagination{
+    margin: 0 auto;
+    width: fit-content;
+    background: #8e8e8e23;
+    padding: 6px;
+    color: white !important;
+    margin-top: 2%;
+    text-align: center;
+    margin-bottom: 2%;
+    border: 1px solid #8e8e8e23;
+    border-radius: 6px;
+}
+.pagination a {
+    color: white !important;
+}

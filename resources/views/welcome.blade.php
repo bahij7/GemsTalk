@@ -84,7 +84,7 @@
                             </div>
                         @endif
 
-                        @foreach($posts->reverse() as $post)
+                        @foreach($posts as $post)
                     @if (!$post->is_deleted)
                         @if ($posts->isEmpty())
                             <p>No posts found.</p>
@@ -133,8 +133,8 @@
                             @endif
                             @endif
                             @endforeach
-                        
 
+                        <div class="pagination">{{$posts->links()}}</div>
                     </div>
                 </div>
 

@@ -13,7 +13,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::latest()->simplePaginate(10);
 
         return view('welcome', ['posts' => $posts]);
     }
@@ -56,20 +56,26 @@ class PostsController extends Controller
 
     public function edit($id)
     {
-        // Find the post by its ID
         $post = Post::findOrFail($id);
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post.');
+        }
+
         $categories = Category::all();
         
-        // Pass the post data to the edit view
         return view('pages.edit', compact('post', 'categories'));
     }
 
 
     public function update(Request $request, $id)
     {
-        // Validation logic if needed
         
         $post = Post::findOrFail($id);
+
+        if ($post->user_id !== auth()->id()) {
+            return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post.');
+        }
+
         $post->content = $request->input('content');
         $post->category_id = $request->input('category_id');
         
@@ -96,6 +102,11 @@ class PostsController extends Controller
     public function destroy($postId)
     {
         $post = Post::find($postId);
+        
+        if ($post->user_id !== auth()->id() && auth()->user()->role !== 'admin') {
+            return redirect()->route('posts.index')->with('error', 'You are not authorized to delete this post.');
+        }
+
         if ($post) {
             $post->delete(); 
             return redirect()->back()->with('success', 'Post deleted successfully!');
@@ -103,6 +114,7 @@ class PostsController extends Controller
     
         return redirect()->back()->with('error', 'Error deleting post!');
     }
+
 
     public function show($id)
     {
@@ -113,7 +125,7 @@ class PostsController extends Controller
 
     public function adminPost()
     {
-        $posts = Post::all();
+        $posts = Post::latest()->simplePaginate(20);
         return view('pages.admin.posts', ['posts' => $posts]);
     }
 

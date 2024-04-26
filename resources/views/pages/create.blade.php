@@ -64,36 +64,42 @@
 
             <div class="main">
 
-                <div class="main-body">
+                <div class="main-body" style="margin-top: 0%;">
                     <div class="create">
+                        
                         <div class="create-head">
-                            {{ auth()->user()->name }}
-                        </div>
-                    <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="create-body">
+                            <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                                @csrf
                             <textarea name="content" placeholder="Start typing your post...*" required></textarea>
-                            
-                            <select name="category_id" required>
-                                <option value="">Select a category*</option>
-                                @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            
-                            <label>Add a Link</label>
-                            <input type="text" name="link" placeholder="e.g. https://www.bahij.xyz"/>
-                            <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>
-                            
                         </div>
 
                         <div class="create-foot">
-                            <button type="button"><a href='/'>Cancel</a></button>
-                            <button type="submit">Post</button>
-                        </div>
-                    </form>
 
+                            <div class="foot-top">
+                                <select name="category_id" required>
+                                    <option value="">Select a category*</option>
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>
+                            </div>
+
+                            <div class="foot-middle">
+                                <label>Add a Link</label>
+                                <input type="text" name="link" placeholder="e.g. https://www.bahij.xyz"/>
+                            </div>
+
+                            <div class="foot-bottom">
+                                <button type="submit">Post</button>
+                                <button type="button"><a href='/'>Cancel</a></button>
+                            </div>
+
+                        </div>
                     </div>
+                </form>
+                    
                 </div>
             </div>
         </div>

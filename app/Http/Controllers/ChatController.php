@@ -32,7 +32,7 @@ class ChatController extends Controller
 
     public function adminChat()
     {
-        $chats = Chat::latest()->get();
+        $chats = Chat::latest()->simplePaginate(20);
         return view('pages.admin.chat', compact('chats'));
     }
 

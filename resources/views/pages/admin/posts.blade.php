@@ -66,19 +66,16 @@
             <p style="font-size: 12px">TOTAL POSTS ({{$posts->count()}})</p>
 
                     <table>
-                        <tr><th>Creator</th><th>Content</th><th>Category</th><th>Media</th><th>Link</th><th>is Deleted?</th><th>Published at</th><th>Actions</th></tr>
-                        {{-- <tr><td style="width: 15%">AHmed BAHIJ</td><td style="width: 20%">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto quia dolorem accusamus ea aliquid sunt ad, doloremque temporibus repudiandae est reiciendis hic consequatur excepturi debitis alias voluptate perspiciatis, veritatis enim.</td><td style="width: 10%">Catg</td><td style="width: 10%">Media</td><td style="width: 10%">Link</td><td style="width: 10%">deleted</td><td>2024-04-16 09:31:45	</td><td><button>Delete</button></td></tr> --}}
-                           
-                        
-                            @foreach ($posts->reverse() as $post)
+                        <tr><th>Creator</th><th>Content</th><th>Category</th><th>Media</th><th>Link</th><th>Published at</th><th>Actions</th></tr>
+
+                            @foreach ($posts as $post)
                         <tr>
                             <td style="width: 15%">{{$post->user->name}}</td>
-                            <td style="width: 20%">{{ $post->content }}</td>
+                            <td style="width: 30%">{{ $post->content }}</td>
                             <td style="width: 10%">{{ $post->category->name }}</td>
                             <td style="width: 10%">@if($post->media)<i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
                             <td style="width: 10%">@if($post->link) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
-                            <td style="width: 10%">@if($post->is_deleted) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
-                            <td>{{$post->created_at}}</td>
+                            <td>{{$post->updated_at}}</td>
                             <td>
                                 <form method="POST" action="{{ route('adminpost.delete', $post->id) }}">
                                     @csrf
@@ -90,6 +87,8 @@
                             @endforeach
                     </table>
                 @endif
+                <div class="pagination">{{$posts->links()}}</div>
+
                 </div>
 
             </div>

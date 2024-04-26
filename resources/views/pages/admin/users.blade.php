@@ -67,7 +67,7 @@
 
                     <table>
                         <tr><th>Name</th><th>Email</th><th>Role</th><th>Date of Birth</th><th>Date of Join</th><th>Actions</th></tr>
-                            @foreach ($users->reverse() as $user)
+                            @foreach ($users as $user)
                         <tr><td>{{ $user->name }}</td><td>{{ $user->email }}</td><td>{{ $user->role }}</td><td>{{ $user->date_of_birth }}</td><td>{{ $user->created_at }}</td>
                             <td>
                                 <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}">
@@ -85,6 +85,8 @@
                             @endforeach
                     </table>
                 @endif
+                <div class="pagination">{{$users->links()}}</div>
+
                 </div>
 
             </div>

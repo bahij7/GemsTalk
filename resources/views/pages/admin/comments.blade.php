@@ -86,6 +86,8 @@
                             @endforeach
                     </table>
                 @endif
+                <div class="pagination">{{$comments->links()}}</div>
+
                 </div>
 
             </div>

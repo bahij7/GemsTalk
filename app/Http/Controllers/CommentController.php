@@ -28,7 +28,7 @@ class CommentController extends Controller
 
     public function adminComment()
     {
-        $comments = Comments::with('post', 'user')->get();
+        $comments = Comments::with('post', 'user')->latest()->simplePaginate(20);
         return view('pages.admin.comments', compact('comments'));
     }
 }

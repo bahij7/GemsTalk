@@ -63,7 +63,7 @@
                     <p>No Chat.</p>
                 @else
 
-                <p style="font-size: 12px">TOTAL CHATS ({{$chats->count()}})</p>
+                <p style="font-size: 12px">TOTAL CHATS IN THIS PAGE ({{$chats->count()}})</p>
                     <table>
                         <tr><th>Sender</th><th>Message</th><th>Date</th><th>Actions</th></tr>
                         
@@ -79,6 +79,8 @@
                             @endforeach
                     </table>
                     @endif
+                    <div class="pagination">{{$chats->links()}}</div>
+
                 </div>
 
             </div>
