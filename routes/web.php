@@ -22,10 +22,10 @@ Route::get('/posts/create', [CreatePostController::class, 'create'])->name('post
 Route::post('/posts/comments/{post_id}', [CommentController::class, 'store'])->name('comments.store')->middleware(CheckAuth::class);
 
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store')->middleware(CheckAuth::class);
-Route::get('/posts/{id}', [PostsController::class, 'show'])->name('posts.show');
-Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit')->middleware(CheckAuth::class);
-Route::post('/posts/edit/{id}', [PostsController::class, 'update'])->name('posts.update')->middleware(CheckAuth::class);
-Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('posts.delete')->middleware(CheckAuth::class);
+Route::get('/posts/{slug}', [PostsController::class, 'show'])->name('posts.show');
+Route::get('/posts/edit/{slug}', [PostsController::class, 'edit'])->name('posts.edit')->middleware(CheckAuth::class);
+Route::post('/posts/edit/{slug}', [PostsController::class, 'update'])->name('posts.update')->middleware(CheckAuth::class);
+Route::delete('/posts/{slug}', [PostsController::class, 'destroy'])->name('posts.delete')->middleware(CheckAuth::class);
 
 
 Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');

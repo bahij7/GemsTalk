@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('media')->nullable();
             $table->string('link')->nullable();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

@@ -433,112 +433,117 @@ form{
 
 
 .create{
+    width: 90%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 15px;
-    width: 80%;
-    height: 90vh;
-    margin: 0 auto;
-
+    gap: 10px;
 }
 
-.create form{
-    all: unset;
-    width: 95%;
-    height: 90%;
+.create-top{
+    width: 90%;
+    height: 300px;
     margin: 0 auto;
+    background: #8e8e8e23;
+    border: 1px solid #8e8e8e23;
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
 }
 
-    .create-head{
-        width: 100%;
-        height: 60%;
+    .create-top form{
+        all:unset;
+        width: 95%;
+        height: 100%;
         margin: 0 auto;
-        background: #8e8e8e23;
-        border: 1px solid #8e8e8e23;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 20px 0px;
+        box-sizing: border-box;
     }
 
-    .create-head textarea{
+    .create-top textarea{
         width: 100%;
-        min-height: 30%;
         height: 100%;
-        max-height: 100%;
+        max-height: 300px;
         padding: 20px;
         box-sizing: border-box;
         font-family: 'Inter';
         background: none;
         border: 1px solid #8e8e8e23;
         color: white;
-        resize: vertical;
+        resize: none;
         border-radius: 10px;
     }
-    .create-head textarea:focus{
-        outline: 1px solid #8e8e8e23;
+
+    .create-top textarea:focus{
+        outline: 1px solid #8e8e8e57;
     }
 
-    .create-foot{
-        width: 100%;
-        height: 40%;
+
+.create-bottom{
+    width: 90%;
+    margin: 0 auto;
+    background: #8e8e8e23;
+    border: 1px solid #8e8e8e23;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 2%;
+}
+
+    .create-bottom .top{
+        width: 95%;
         margin: 0 auto;
-        background: #8e8e8e23;
-        border: 1px solid #8e8e8e23;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 20px;
-        font-size: 14px;
-    }
-        .foot-top{
-            width: 95%;
-            margin: 0 auto;
-        }
-        
+        margin-top: 2%;
 
-    .foot-top select{
-        width: 60%;
+    }
+
+    .top select{
+        width: 40%;
         background: #8e8e8e23;
         color: white;
         padding: 6px 14px;
         border-radius: 4px;
         border: 1px solid #8e8e8e23;
         outline: unset;
+        cursor: pointer;
     }
 
-    .foot-top select option {
+    .top option{
         background-color: rgba(142, 142, 142, 0.35);
         color: black;
-      }
+    }
 
-    .create-foot input[type='file']::file-selector-button {
+    
+    .top input[type='file']::file-selector-button {
+        width: 60%;
         border: 1px solid #8e8e8e23;
-        border-radius: 6px;
+        border-radius: 4px;
         padding: 6px 14px;
         background-color: #8e8e8e23;
         color: white;
-        transition: 1s;
-      }
+        cursor: pointer;
+    }
 
-
-      .foot-middle{
+    .create-bottom .middle{
         width: 95%;
         margin: 0 auto;
     }
 
-
-    .foot-bottom{
+    .create-bottom .bottom{
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 2%;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 10px;
-        width: 95%;
-        margin: 0 auto;
+        align-items: center;
+        gap: 6px;
     }
-    .create-foot button:first-child{
+
+    .bottom button:first-child{
         all: unset;
         width: 70%;
         background: #0179D1;
@@ -550,12 +555,7 @@ form{
         cursor: pointer;
     }
 
-    .create-foot button a{
-        text-decoration: none;
-        color: white;
-    }
-
-    .create-foot button:last-child{
+    .bottom button:last-child{
         all: unset;
         width: 30%;
         background: #8e8e8e23;
@@ -566,9 +566,11 @@ form{
         box-sizing: border-box;
         cursor: pointer;
     }
-   
-   
 
+    .bottom a{
+        text-decoration: none;
+        color: white;
+    }
 
 .chats{
     width: 90%;

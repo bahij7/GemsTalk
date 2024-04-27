@@ -11,9 +11,9 @@ use App\Models\Comments;
 
 class AdminController extends Controller
 {
-    public function deletep($postId)
+    public function deletep($slug)
     {
-        $post = Post::find($postId);
+        $post = Post::where('slug', $slug)->firstOrFail();
         if ($post) {
             $post->delete(); 
             return redirect('/admin/posts')->with('success', 'Post deleted successfully!');
@@ -35,7 +35,7 @@ class AdminController extends Controller
 
     public function deletee($chatId)
     {
-        $chat = CHat::find($chatId);
+        $chat = Chat::find($chatId);
         if ($chat) {
             $chat->delete(); 
             return redirect('/admin/chat')->with('success', 'Message deleted successfully!');

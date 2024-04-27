@@ -126,7 +126,7 @@
                                 @endif
                                     
                                 <div class="post-foot">
-                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
+                                    <a href="{{ route('posts.show', ['slug' => $post->slug]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
                                 </div>
 
                             </div>

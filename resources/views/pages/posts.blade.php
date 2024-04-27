@@ -73,6 +73,19 @@
                     @if ($posts->isEmpty())
                         <p>No posts found.</p>
                     @else
+
+                    <div class="main-body" style="margin-top: 0%;">
+                        @if(session()->has('success'))
+                        <div class="popup success">
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
+    
+                    @if(session()->has('error'))
+                        <div class="popup danger">
+                            {{ session()->get('error') }}
+                        </div>
+                    @endif
                     <p style="font-size: 12px">TOTAL POSTS ({{$posts->count()}})</p>
                     
                     
@@ -87,13 +100,13 @@
                                     <span>{{ $post->user->name }}</span>
                                     <span>
                                        
-                                        <form action="{{ route('posts.delete', $post->id) }}" method="POST">
+                                        <form action="{{ route('posts.delete', $post->slug) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('Are you sure you want to delete?')" style="text-decoration: underline"><i class="fa-solid fa-trash"></i> Delete Post</button>
                                         </form>
                                         
-                                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" style="color: #f5f5f5b8"><i class="fa-regular fa-pen-to-square"></i> Edit Post</a>                                        {{ $post->category->name }}
+                                        <a href="{{ route('posts.edit', ['slug' => $post->slug]) }}" style="color: #f5f5f5b8"><i class="fa-regular fa-pen-to-square"></i> Edit Post</a>                                        {{ $post->category->name }}
                                     </span>
                                 </div>
 
@@ -121,7 +134,7 @@
                             @endif
                                 
                             <div class="post-foot">
-                                <a href="{{ route('posts.show', ['id' => $post->id]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
+                                <a href="{{ route('posts.show', ['slug' => $post->slug]) }}"><i class="fa-solid fa-comment"></i> Comments ({{ $post->comments()->count() }})</a>
                             </div>
 
                         </div>

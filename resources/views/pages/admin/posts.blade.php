@@ -77,7 +77,7 @@
                             <td style="width: 10%">@if($post->link) <i style="color: #00753b" class="fa-solid fa-check"></i> @else <i style="color: #c61025" class="fa-solid fa-xmark"></i> @endif</td>
                             <td>{{$post->updated_at}}</td>
                             <td>
-                                <form method="POST" action="{{ route('adminpost.delete', $post->id) }}">
+                                <form method="POST" action="{{ route('adminpost.delete', $post->slug) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>

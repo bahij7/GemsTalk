@@ -57,18 +57,18 @@
                     {{ session()->get('error') }}
                 </div>
             @endif
-           
-            @if ($categories->isEmpty())
-                <p>No Categories.</p>
-            @else
-
-            <p style="font-size: 12px">TOTAL CATEGORIES ({{$categories->count()}})</p>
-
             <form method="POST" action="{{ route('categories.store') }}" style="margin-top: 2%; margin-bottom: 2%">
                 @csrf
                 <input type="text" name="name" placeholder="Category's Name" style="margin-bottom: 6px"/>   
                 <button type="submit">Create a new Category</button>
             </form>
+            @if ($categories->isEmpty())
+                <p>No Categories.</p>
+            @else
+           
+            <p style="font-size: 12px">TOTAL CATEGORIES ({{$categories->count()}})</p>
+
+        
             
 
                     <table>

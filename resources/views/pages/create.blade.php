@@ -63,19 +63,19 @@
             
 
             <div class="main">
+                
 
-                <div class="main-body" style="margin-top: 0%;">
+                
                     <div class="create">
-                        
-                        <div class="create-head">
+
+                        <div class="create-top">
                             <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                                 @csrf
                             <textarea name="content" placeholder="Start typing your post...*" required></textarea>
                         </div>
 
-                        <div class="create-foot">
-
-                            <div class="foot-top">
+                        <div class="create-bottom">
+                            <div class="top">
                                 <select name="category_id" required>
                                     <option value="">Select a category*</option>
                                     @foreach ($categories as $category)
@@ -83,26 +83,28 @@
                                     @endforeach
                                 </select>
 
-                                <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>
-                            </div>
+                                <input type="file" name="media" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx, .pptx, .xlsx"/>                            </div>
 
-                            <div class="foot-middle">
+                            <div class="middle">
                                 <label>Add a Link</label>
                                 <input type="text" name="link" placeholder="e.g. https://www.bahij.xyz"/>
                             </div>
 
-                            <div class="foot-bottom">
+                            <div class="bottom">
                                 <button type="submit">Post</button>
                                 <button type="button"><a href='/'>Cancel</a></button>
                             </div>
-
                         </div>
+
+                       
+
+
                     </div>
-                </form>
-                    
-                </div>
+                  
+                </div>  
             </div>
         </div>
+
 
 
 

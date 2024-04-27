@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comments;
@@ -42,21 +43,28 @@ class PostsController extends Controller
             $filePath = 'images/' . $fileName;
         }
 
+
+        do {
+            $slug = Str::random(8);
+        } while (Post::where('slug', $slug)->exists());
+
         $post = new Post();
         $post->user_id = auth()->id();
         $post->category_id = $request->category_id;
         $post->content = $request->content;
         $post->media = $filePath; 
         $post->link = $request->link; 
+        $post->slug = $slug;
         $post->save();
 
         return redirect('/')->with('success', 'Post created successfully!');
 
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::where('slug', $slug)->firstOrFail();
+
         if ($post->user_id !== auth()->id()) {
             return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post.');
         }
@@ -67,10 +75,10 @@ class PostsController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
         
-        $post = Post::findOrFail($id);
+       $post = Post::where('slug', $slug)->firstOrFail();
 
         if ($post->user_id !== auth()->id()) {
             return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post.');
@@ -99,9 +107,10 @@ class PostsController extends Controller
 
     
 
-    public function destroy($postId)
+    public function destroy($slug)
     {
-        $post = Post::find($postId);
+        $post = Post::where('slug', $slug)->firstOrFail();
+
         
         if ($post->user_id !== auth()->id() && auth()->user()->role !== 'admin') {
             return redirect()->route('posts.index')->with('error', 'You are not authorized to delete this post.');
@@ -116,9 +125,9 @@ class PostsController extends Controller
     }
 
 
-    public function show($id)
+    public function show($slug)
     {
-        $post = Post::with('comments')->findOrFail($id);
+        $post = Post::with('comments')->where('slug', $slug)->firstOrFail();
 
         return view('pages.show', compact('post'));
     }
