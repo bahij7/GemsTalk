@@ -24,8 +24,8 @@ class PostsController extends Controller
         $user = Auth::user();
         $posts = Post::where('user_id', $user->id)->get();
         return view('pages.posts', ['posts' => $posts]);
-    }
-    
+    }  
+
     public function store(Request $request)
     {
         
@@ -74,10 +74,8 @@ class PostsController extends Controller
         return view('pages.edit', compact('post', 'categories'));
     }
 
-
     public function update(Request $request, $slug)
     {
-        
        $post = Post::where('slug', $slug)->firstOrFail();
 
         if ($post->user_id !== auth()->id()) {
@@ -102,10 +100,7 @@ class PostsController extends Controller
         $post->save();
         
         return redirect('/posts')->with('success', 'Post updated successfully');
-    }
-    
-
-    
+    } 
 
     public function destroy($slug)
     {
@@ -123,15 +118,12 @@ class PostsController extends Controller
     
         return redirect()->back()->with('error', 'Error deleting post!');
     }
-
-
     public function show($slug)
     {
         $post = Post::with('comments')->where('slug', $slug)->firstOrFail();
 
         return view('pages.show', compact('post'));
     }
-
     public function adminPost()
     {
         $posts = Post::latest()->simplePaginate(20);
